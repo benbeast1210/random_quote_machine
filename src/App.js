@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import Tweet from './Tweet';
 
 export default function App() {
-
-  // RNG
-  const randInt = Math.floor(Math.random() * 1643);
 
   // initialize state and assign it a random quote
   const [quotes, setQuotes] = useState([]);
@@ -15,7 +11,10 @@ export default function App() {
     .then(function (response) { return response.json })
     .then(function (data) { setQuotes(data) })
   
-  //find a way to set the quote
+  //find a way to set the quote onLoad()
+
+  // RNG
+  const randInt = Math.floor(Math.random() * quotes.length);
 
   return (
     <div className="App">
@@ -33,7 +32,9 @@ export default function App() {
       <button id='new-quote' onClick={useEffect(() => setQuote(quotes[randInt]), [quotes, randInt])}>New Quote</button>
       
       {/* (User Story #5 - exists√, #10 - functionality/path) This button is to tweet the quote */}
-      <Tweet />
+      <button>
+        <a href="https://twitter.com/" id="tweet-quote" title="Tweet this quote!" target="_top">Tweet this quote!</a>
+      </button>
     </div>
   );
 }
